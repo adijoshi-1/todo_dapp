@@ -79,9 +79,25 @@ contract Todo {
      * `id` must be less than tasks counter.
      *
      */
-    function getTaskDetails(uint _id) external view  returns(Tasks memory) {
+    function getTaskDetails(
+        uint _id
+    )
+        external
+        view
+        returns(
+            string memory title,
+            string memory description,
+            bool isCompleted,
+            bool isRemoved
+        )
+    {
         require(_id < tasksCounter, "Enter a valid task Id");
-        return tasks[_id];
+        return(
+            title = tasks[_id].title,
+            description = tasks[_id].description,
+            isCompleted = tasks[_id].isCompleted,
+            isRemoved = tasks[_id].isRemoved
+        );
     }
 
     /**
