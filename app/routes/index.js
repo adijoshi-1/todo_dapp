@@ -4,7 +4,7 @@ const fs = require('fs')
 const routesPath = `${__dirname}/`
 const {
   removeExtensionFromFile
-} = require('../middleware/removeExtensionFromFile')
+} = require('../middleware/utils/removeExtensionFromFile')
 
 fs.readdirSync(routesPath).filter((file) => {
   const routeFile = removeExtensionFromFile(file)

@@ -1,4 +1,6 @@
 const { Contract } = require('../helpers')
+const { handleError } = require('../../middleware/utils/handleError')
+const { buildErrorObj } = require('../../middleware/utils/buildErrorObj')
 
 const getOwner = async (req, res) => {
   try {
@@ -7,8 +9,7 @@ const getOwner = async (req, res) => {
       owner
     })
   } catch (err) {
-    console.log(err)
-    res.status(500)
+    return handleError(res, buildErrorObj(500, err.message))
   }
 }
 

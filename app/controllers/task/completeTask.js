@@ -1,6 +1,8 @@
 require('dotenv').config()
 const { Contract } = require('../helpers')
 const contract_address = process.env.CONTRACT_ADDRESS
+const { handleError } = require('../../middleware/utils/handleError')
+const { buildErrorObj } = require('../../middleware/utils/buildErrorObj')
 
 const completeTask = async (req, res) => {
   try {
@@ -12,8 +14,7 @@ const completeTask = async (req, res) => {
       encoded_abi
     })
   } catch (err) {
-    console.log(err.message)
-    res.status(500)
+    return handleError(res, buildErrorObj(500, err.message))
   }
 }
 

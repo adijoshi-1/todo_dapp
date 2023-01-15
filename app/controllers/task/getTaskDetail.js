@@ -1,4 +1,6 @@
 const { Contract } = require('../helpers')
+const { handleError } = require('../../middleware/utils/handleError')
+const { buildErrorObj } = require('../../middleware/utils/buildErrorObj')
 
 const getTaskDetail = async (req, res) => {
   try {
@@ -11,8 +13,7 @@ const getTaskDetail = async (req, res) => {
       isRemoved: data.isRemoved
     })
   } catch (err) {
-    console.log(err.message)
-    res.status(500)
+    return handleError(res, buildErrorObj(500, err.message))
   }
 }
 

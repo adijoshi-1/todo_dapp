@@ -4,7 +4,9 @@ const path = require('path')
 const PORT = process.env.PORT || 8080
 const bodyParser = require('body-parser')
 const cors = require('cors')
+const morgan = require('morgan')
 
+app.use(morgan('dev'))
 app.get('/', (req, res) => {
   try {
     res.status(200).sendFile(path.join(__dirname) + '/pages/index.html')
@@ -27,7 +29,6 @@ app.use(
 )
 
 app.use(cors())
-
 app.use(require('./app/routes'))
 
 const server = app.listen(PORT, () => {

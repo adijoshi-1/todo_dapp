@@ -1,19 +1,14 @@
-require('dotenv').config
-const { Contract } = require('../helpers')
+require('dotenv').config()
 const contract_address = process.env.CONTRACT_ADDRESS
+const { Contract } = require('../helpers')
 const { handleError } = require('../../middleware/utils/handleError')
 const { buildErrorObj } = require('../../middleware/utils/buildErrorObj')
 
-const updateTask = async (req, res) => {
+const unCompleteTask = async (req, res) => {
   try {
-    const { id, title, description } = req.body
-    const Transaction = await Contract.methods.updateTask(
-      id,
-      title,
-      description
-    )
+    const { id } = req.body
+    const Transaction = await Contract.methods.unCompleteTask(id)
     const encoded_abi = await Transaction.encodeABI()
-
     res.status(200).send({
       contract_to_interact: contract_address,
       encoded_abi
@@ -23,4 +18,4 @@ const updateTask = async (req, res) => {
   }
 }
 
-module.exports = updateTask
+module.exports = unCompleteTask

@@ -1,4 +1,6 @@
 const { Contract } = require('../helpers')
+const { handleError } = require('../../middleware/utils/handleError')
+const { buildErrorObj } = require('../../middleware/utils/buildErrorObj')
 
 const getCounter = async (req, res) => {
   try {
@@ -7,8 +9,7 @@ const getCounter = async (req, res) => {
       counter
     })
   } catch (err) {
-    console.log(err.message)
-    res.status(500)
+    return handleError(res, buildErrorObj(500, err.message))
   }
 }
 
