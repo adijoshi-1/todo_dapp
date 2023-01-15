@@ -1,7 +1,14 @@
-export const App = () => {
+import { useState } from 'react'
+import 'bulma/css/bulma.min.css'
+import { Nav } from './components/Nav'
+import { Main } from './components/Main'
+
+export const App = (props) => {
+  const [account, setAccount] = useState('')
   return (
-    <div>
-      <h1>Todo Dapp</h1>
-    </div>
+    <>
+      <Nav account={account} setAccount={setAccount} />
+      <Main account={account} />
+    </>
   )
 }
